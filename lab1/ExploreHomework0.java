@@ -1,30 +1,27 @@
 public class ExploreHomework0 {
+    public static void windowPosSum(int[] a, int n) {
+        int arrayLength = a.length;
 
-    public static int Sum(int[] a) {
-        int sum = 0;
-        for (int i = 0; i < a.length; i = i + 1) {
-            sum = sum + a[i];
-        }
-        return sum;
-    }
+        for (int i = 0; i < arrayLength; i++) {
+            int j = i + 1;
 
-    public static void Triangle(int dim) {
-        if (dim == 0) {
-            return;
+            if (a[i] < 0) {
+                System.out.println(a[i]);
+                continue;
+            }
+
+            while (j - i < n + 1 && j < arrayLength) {
+                a[i] += a[j];
+                j++;
+            }
+            System.out.println(a[i]);
         }
-        Triangle(dim - 1);
-        for (int i = 0; i < dim; i++) {
-            System.out.print("#");
-        }
-        System.out.println();
     }
 
     public static void main(String[] args) {
 
-        int[] numbers = new int[]{9, 2, 15, 2, 22, 10, 6};
-
-        Triangle(10);
-        System.out.println(Sum(numbers));
+        int[] numbers = new int[]{1, 2, -3, 4, 5, 4};
+        windowPosSum(numbers, 3);
 
     }
 }
