@@ -138,6 +138,15 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        int size = b.size();
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (b.tile(i, j) == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -148,6 +157,17 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        int size = b.size();
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (b.tile(i, j) != null) {
+                    if (b.tile(i, j).value() == MAX_PIECE) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -159,6 +179,45 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+
+        // For each tile, check if it is null, or check if adjacent is same value
+        int size = b.size();
+
+        // For each tile
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                // If there is a space, then immediately a valid move exists
+                if (b.tile(i, j) == null) {
+                    return true;
+                }
+
+                /* Indices adjacent to tile(i, j):
+                 * i - 1, j
+                 * i, j + 1
+                 * i + 1, j
+                 * i, j - 1
+                 */
+
+                int mainTileValue = b.tile(i, j).value();
+
+                for (int k = -1; k <= 2; k++) {
+                    // Indices of the adjacent tiles
+                    int colAdjIndex = i + (k % 2);
+                    int rowAdjIndex = j + ((-k + 1) % 2); // Remainder magic to capture correct indices
+
+                    if (colAdjIndex < 0 || rowAdjIndex < 0 || colAdjIndex >= size || rowAdjIndex >= size) {
+                        continue;
+                    }
+
+                    int adjTileValue = b.tile(colAdjIndex, rowAdjIndex).value();
+
+                    if (mainTileValue == adjTileValue) {
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 
