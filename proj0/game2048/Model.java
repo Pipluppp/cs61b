@@ -114,6 +114,60 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
+
+        board.setViewingPerspective(side);
+        // For each column
+        for (int col = 0, boardSize = board.size(); col < boardSize; col++) {
+
+            // To avoid triple merges, we add a helper variable which assures merges happen only every other iteration
+            int canMerge = 0;
+            int canMergeIndex = 0;
+
+            // Start from 3rd row, then downwards
+            for (int row = boardSize - 2; row >= 0; row--) {
+
+                if (canMergeIndex % 2 == row % 2) {
+                    canMerge = 0;
+                }
+
+                Tile t = board.tile(col, row);
+
+                // Find non-null tile
+                if (board.tile(col, row) == null) {
+                    canMergeIndex--;
+                    continue;
+                }
+
+                // Find farthest empty space above our tile
+                int newRow = row;
+                while (board.tile(col, newRow + 1) == null) {
+                    newRow++;
+
+                    if (newRow == boardSize - 1) {
+                        break;
+                    }
+                }
+
+                // Either move to empty space or merge
+                if (newRow == 3) {
+                    board.move(col, newRow, t);
+                }
+                else if (canMerge == 0 && board.tile(col, newRow + 1).value() == t.value()) {
+                    board.move(col, newRow + 1, t);
+                    score += (2 * t.value());
+
+                    canMergeIndex = row;
+                    canMerge = 1;
+                } else {
+                    board.move(col, newRow, t);
+                }
+
+                changed = true;
+            }
+        }
+
+        board.setViewingPerspective(Side.NORTH);
+
         checkGameOver();
         if (changed) {
             setChanged();
