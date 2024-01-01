@@ -209,6 +209,10 @@ public class Model extends Observable {
                         continue;
                     }
 
+                    if (b.tile(colAdjIndex, rowAdjIndex) == null) {
+                        continue;
+                    }
+
                     int adjTileValue = b.tile(colAdjIndex, rowAdjIndex).value();
 
                     if (mainTileValue == adjTileValue) {
