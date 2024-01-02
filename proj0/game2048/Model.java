@@ -125,41 +125,32 @@ public class Model extends Observable {
 
             // Start from 3rd row, then downwards
             for (int row = boardSize - 2; row >= 0; row--) {
+                Tile t = board.tile(col, row);
 
                 if (canMergeIndex % 2 == row % 2) {
                     canMerge = 0;
                 }
 
-                Tile t = board.tile(col, row);
-
-                // Find non-null tile
+                // Skip null tiles
                 if (board.tile(col, row) == null) {
                     canMergeIndex--;
                     continue;
                 }
 
-                // Find farthest empty space above our tile
-                int newRow = row;
-                while (board.tile(col, newRow + 1) == null) {
-                    newRow++;
-
-                    if (newRow == boardSize - 1) {
-                        break;
-                    }
-                }
+                int emptySpace = farthestEmptySpaceAbove(t, col, row);
 
                 // Either move to empty space or merge
-                if (newRow == 3) {
-                    board.move(col, newRow, t);
+                if (emptySpace == 3) {
+                    board.move(col, emptySpace, t);
                 }
-                else if (canMerge == 0 && board.tile(col, newRow + 1).value() == t.value()) {
-                    board.move(col, newRow + 1, t);
+                else if (canMerge == 0 && board.tile(col, emptySpace + 1).value() == t.value()) {
+                    board.move(col, emptySpace + 1, t);
                     score += (2 * t.value());
 
                     canMergeIndex = row;
                     canMerge = 1;
                 } else {
-                    board.move(col, newRow, t);
+                    board.move(col, emptySpace, t);
                 }
 
                 changed = true;
@@ -173,7 +164,22 @@ public class Model extends Observable {
             setChanged();
         }
         return changed;
-    }
+    };
+
+    public int farthestEmptySpaceAbove(Tile t, int col, int row) {
+        /* Find farthest connected empty space above tile t */
+        int boardSize = board.size();
+
+        while (board.tile(col, row + 1) == null) {
+            row++;
+
+            // End loop if at top-most tile
+            if (row == boardSize - 1) {
+                break;
+            }
+        }
+        return row;
+    };
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
