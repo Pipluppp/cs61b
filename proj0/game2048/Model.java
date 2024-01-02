@@ -120,20 +120,14 @@ public class Model extends Observable {
         for (int col = 0, boardSize = board.size(); col < boardSize; col++) {
 
             // To avoid triple merges, we add a helper variable which assures merges happen only every other iteration
-            int canMerge = 0;
-            int canMergeIndex = 0;
+            boolean canMerge = true;
 
             // Start from 3rd row, then downwards
             for (int row = boardSize - 2; row >= 0; row--) {
                 Tile t = board.tile(col, row);
 
-                if (canMergeIndex % 2 == row % 2) {
-                    canMerge = 0;
-                }
-
                 // Skip null tiles
                 if (board.tile(col, row) == null) {
-                    canMergeIndex--;
                     continue;
                 }
 
@@ -143,14 +137,14 @@ public class Model extends Observable {
                 if (emptySpace == 3) {
                     board.move(col, emptySpace, t);
                 }
-                else if (canMerge == 0 && board.tile(col, emptySpace + 1).value() == t.value()) {
+                else if (canMerge && board.tile(col, emptySpace + 1).value() == t.value()) {
                     board.move(col, emptySpace + 1, t);
                     score += (2 * t.value());
 
-                    canMergeIndex = row;
-                    canMerge = 1;
+                    canMerge = false;
                 } else {
                     board.move(col, emptySpace, t);
+                    canMerge = true;
                 }
 
                 changed = true;
