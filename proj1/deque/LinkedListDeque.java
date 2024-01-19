@@ -6,10 +6,10 @@ public class LinkedListDeque<T> {
         public Node next;
         public Node prev;
 
-        public Node (T x, Node n) {
-            prev = null;
-            item = x;
-            next = n;
+        public Node (Node prev, T item, Node next) {
+            this.prev = prev;
+            this.item = item;
+            this.next = next;
         }
     }
 
@@ -19,20 +19,11 @@ public class LinkedListDeque<T> {
 
     // Constructor empty list
     public LinkedListDeque() {
-        sentinel = new Node(null, null);
+        sentinel = new Node(null,null, null);
+        sentinel.prev = sentinel.next = sentinel;
     }
 
-    // Constructor list one node
-    public LinkedListDeque(T x) {
-        sentinel = new Node(null, null);
-        Node firstNode = new Node(x, null);
-        sentinel.next = firstNode;
-        firstNode.next = firstNode;
-        firstNode.prev = firstNode;
-        size = 1;
-    }
-
-    public void addFirst(T item) {
+/*    public void addFirst(T item) {
         if (isEmpty()) {
             sentinel.next = new Node(item, null);
             sentinel.next.next = sentinel.next;
@@ -50,6 +41,12 @@ public class LinkedListDeque<T> {
             sentinel.next.prev = last;
             last.next = sentinel.next;
         }
+    }*/
+
+    public void addFirst(T item) {
+        Node node = new Node(sentinel, item, sentinel.next);
+        sentinel.next.prev = node;
+        sentinel.next = node;
     }
 
     public boolean isEmpty() {
