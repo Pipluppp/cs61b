@@ -136,4 +136,13 @@ public class LinkedListDequeTest {
 
         */
     }
+
+    @Test
+    /* Check addFirst correctly connects the pointers*/
+    public void addFirstTest() {
+        LinkedListDeque<Integer> list = new LinkedListDeque<>();
+        for (int i = 1; i <= 10; i++) {
+            list.addFirst(i);
+        }
+    }
 }
