@@ -195,4 +195,19 @@ public class LinkedListDequeTest {
         }
     }
 
+    @Test
+    public void equalsTest() {
+        LinkedListDeque<Integer> list1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> list2 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {
+            list1.addLast(i);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            list2.addLast(i);
+        }
+        boolean result = list1.equals(list2);
+        assertTrue(result);
+    }
+
 }

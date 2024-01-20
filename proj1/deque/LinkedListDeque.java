@@ -146,4 +146,25 @@ public class LinkedListDeque<T> implements Iterable<T> {
             return node.item;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof LinkedListDeque otherLLD) {
+            if (this.size != otherLLD.size) {
+                return false;
+            }
+            Node node = otherLLD.sentinel;
+
+            for (T x : this) {
+                node = node.next;
+                if (x != node.item) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
