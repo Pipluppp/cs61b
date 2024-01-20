@@ -100,4 +100,21 @@ public class LinkedListDeque<T> {
 
         return node.item;
     }
+
+    public T getRecursive(int index) {
+        Node node = sentinel;
+        node = walkNodes(index, node);
+
+        return node.item;
+    }
+
+    /** Walk the nodes for the getRecursive */
+    public Node walkNodes(int index, Node node) {
+        if (index == 0) {
+            return node;
+        }
+        node = node.next;
+
+        return walkNodes(index - 1, node);
+    }
 }
