@@ -97,4 +97,18 @@ public class ArrayDeque<T> {
         int newIndex = (capacity + index) % capacity;
         return newIndex;
     }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void printDeque() {
+        int front = returnIndex(nextFirst + 1);
+
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[front] + " ");
+            front = returnIndex(front + 1);
+        }
+        System.out.println();
+    }
 }

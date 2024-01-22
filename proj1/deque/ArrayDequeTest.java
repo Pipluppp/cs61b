@@ -41,4 +41,21 @@ public class ArrayDequeTest {
             assertEquals(i, deque.removeLast());
         }
     }
+
+    @Test
+    public void printDeque() {
+        ArrayDeque deque = new ArrayDeque();
+
+        // 0, 1, 2, 3, ...
+        for (int i = 0; i < 50; i++) {
+            deque.addLast(i);
+        }
+
+        // 99, 98, 97, ..., 50, 0, 1, 2, ...
+        for (int i = 50; i < 100; i++) {
+            deque.addFirst(i);
+        }
+
+        deque.printDeque();
+    }
 }
