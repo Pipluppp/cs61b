@@ -17,7 +17,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void addRemoveFirst() {
+    public void addRemoveFirstTest() {
         ArrayDeque deque = new ArrayDeque();
 
         for (int i = 0; i < 100; i++) {
@@ -30,7 +30,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void addRemoveLast() {
+    public void addRemoveLastTest() {
         ArrayDeque deque = new ArrayDeque();
 
         for (int i = 0; i < 100; i++) {
@@ -43,7 +43,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void printDeque() {
+    public void printDequeTest() {
         ArrayDeque deque = new ArrayDeque();
 
         // 0, 1, 2, 3, ...
@@ -57,5 +57,19 @@ public class ArrayDequeTest {
         }
 
         deque.printDeque();
+    }
+
+    @Test
+    public void getDequeTest() {
+        ArrayDeque deque = new ArrayDeque();
+
+        // 0, 1, 2, 3, ...
+        for (int i = 0; i < 50; i++) {
+            deque.addLast(i);
+        }
+
+        for (int i = 50; i >= 0; i--) {
+            System.out.println(deque.get(i));
+        }
     }
 }

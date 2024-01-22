@@ -111,4 +111,14 @@ public class ArrayDeque<T> {
         }
         System.out.println();
     }
+
+    // Index is the ith item of the list (0 is front, etc.)
+    public T get(int index) {
+        if (index < 0 || index >  size) {
+            return null;
+        }
+        int arrIndex = returnIndex(nextFirst + index + 1);
+        T node = arr[arrIndex];
+        return node;
+    }
 }
