@@ -103,4 +103,30 @@ public class ArrayDequeTest {
         boolean result = arr1.equals(arr2);
         assertTrue(result);
     }
+
+    @Test
+    public void resizeArrayDequeTest() {
+        int initialSize = 8;
+        ArrayDeque<Integer> arr = new ArrayDeque<>();
+
+        // Fills array with 10 items, resizes array to 16
+        for (int i = 0; i < 10; i++) {
+            arr.addLast(i);
+        }
+        assertEquals(initialSize * 2, arr.capacity());
+
+        // Adds 10 more, now total of 20 items, resizes array to 32
+        for (int i = 10; i < 20; i++) {
+            arr.addLast(i);
+        }
+
+        assertEquals(initialSize * 2 * 2, arr.capacity());
+
+        // Remove 13 items (7 < 32 / 4), resizes array to 16
+        for (int i = 0; i < 14; i++) {
+            arr.removeLast();
+        }
+
+        assertEquals(initialSize * 2 * 2 / 2, arr.capacity());
+    }
 }

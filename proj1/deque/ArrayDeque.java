@@ -32,6 +32,10 @@ public class ArrayDeque<T> implements Iterable<T> {
         return size;
     }
 
+    public int capacity() {
+        return capacity;
+    }
+
     public void resize(int newCapacity) {
         T[] newArray = (T[]) new Object[newCapacity];
 
@@ -47,7 +51,7 @@ public class ArrayDeque<T> implements Iterable<T> {
 
     public void addFirst(T item) {
         if (size == capacity) {
-            resize(size * 2);
+            resize(capacity * 2);
         }
         size++;
 
@@ -57,7 +61,7 @@ public class ArrayDeque<T> implements Iterable<T> {
 
     public void addLast(T item) {
         if (size == capacity) {
-            resize(size * 2);
+            resize(capacity * 2);
         }
         size++;
 
@@ -67,7 +71,7 @@ public class ArrayDeque<T> implements Iterable<T> {
 
     public T removeFirst() {
         if (size < capacity / 4) {
-            resize(size * 2);
+            resize(capacity / 2);
         }
         size--;
 
@@ -81,7 +85,7 @@ public class ArrayDeque<T> implements Iterable<T> {
 
     public T removeLast() {
         if (size < capacity / 4) {
-            resize(size * 2);
+            resize(capacity / 2);
         }
         size--;
 
