@@ -88,4 +88,19 @@ public class ArrayDequeTest {
             System.out.println(i);
         }
     }
+
+    @Test
+    public void equalsTest() {
+        ArrayDeque<Integer> arr1 = new ArrayDeque<>();
+        ArrayDeque<Integer> arr2 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            arr1.addLast(i);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            arr2.addLast(i);
+        }
+        boolean result = arr1.equals(arr2);
+        assertTrue(result);
+    }
 }
