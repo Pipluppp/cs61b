@@ -1,8 +1,9 @@
 package deque;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Iterable<T> {
     private int size;
     private T[] arr;
     private int capacity;
@@ -121,4 +122,29 @@ public class ArrayDeque<T> {
         T node = arr[arrIndex];
         return node;
     }
+
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        private int startIndex;
+        private int endIndex;
+
+        public ArrayDequeIterator() {
+            startIndex = returnIndex(nextFirst + 1);
+            endIndex = returnIndex(nextLast - 1);
+        }
+
+        public boolean hasNext() {
+            return startIndex != endIndex;
+        }
+
+        public T next() {
+            int index = startIndex;
+            startIndex = returnIndex(startIndex + 1);
+            return arr[index];
+        }
+    }
+
 }

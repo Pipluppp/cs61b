@@ -3,6 +3,8 @@ package deque;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 public class ArrayDequeTest {
 
     @Test
@@ -70,6 +72,20 @@ public class ArrayDequeTest {
 
         for (int i = 50; i >= 0; i--) {
             System.out.println(deque.get(i));
+        }
+    }
+
+    @Test
+    public void iteratorArrayDequeTest() {
+        ArrayDeque<Integer> ADeque = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            ADeque.addFirst(i);
+        }
+
+        Iterator<Integer> ADequeSeer = ADeque.iterator();
+
+        for (int i: ADeque) {
+            System.out.println(i);
         }
     }
 }
