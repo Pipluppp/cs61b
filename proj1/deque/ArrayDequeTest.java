@@ -129,4 +129,36 @@ public class ArrayDequeTest {
 
         assertEquals(initialSize * 2 * 2 / 2, arr.capacity());
     }
+
+    // Adopted tests from original test on LinkedListDeque
+
+    @Test
+    /* Add large number of elements to deque; check if order is correct. */
+    public void bigArrayDequeTest() {
+        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+        for (int i = 0; i < 1000000; i++) {
+            ad.addLast(i);
+        }
+
+        for (double i = 0; i < 500000; i++) {
+            assertEquals("Should have the same value", i, (double) ad.removeFirst(), 0.0);
+        }
+
+        for (double i = 999999; i > 500000; i--) {
+            assertEquals("Should have the same value", i, (double) ad.removeLast(), 0.0);
+        }
+
+    }
+
+    @Test
+    /* check if null is return when removing from an empty LinkedListDeque. */
+    public void emptyNullReturnTest() {
+        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+
+        boolean passed1 = false;
+        boolean passed2 = false;
+        assertEquals("Should return null when removeFirst is called on an empty Deque,", null, ad.removeFirst());
+        assertEquals("Should return null when removeLast is called on an empty Deque,", null, ad.removeLast());
+    }
+
 }
