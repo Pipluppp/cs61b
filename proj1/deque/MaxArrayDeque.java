@@ -33,4 +33,27 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     public static IntComparator getIntComparator() {
         return new IntComparator();
     }
+
+    private static class DigitSumComparator implements Comparator<Integer> {
+        public int compare(Integer o1, Integer o2) {
+            int sum1 = 0;
+            int sum2 = 0;
+
+            while (o1 != 0) {
+                sum1 += o1 % 10;
+                o1 /= 10;
+            }
+
+            while (o2 != 0) {
+                sum2 += o2 % 10;
+                o2 /= 10;
+            }
+
+            return sum1 - sum2;
+        }
+    }
+
+    public static DigitSumComparator getDigitSumComparator() {
+        return new DigitSumComparator();
+    }
 }

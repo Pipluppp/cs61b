@@ -17,4 +17,16 @@ public class MaxArrayDequeTest {
         assertEquals(max, (int) mad.max());
 
     }
+
+    @Test
+    public void DigitSumComparatorTest() {
+        MaxArrayDeque<Integer> mad = new MaxArrayDeque<>(MaxArrayDeque.getDigitSumComparator());
+
+        int expectedMax = 99;
+        for (int i = 0; i < 100; i++) {
+            mad.addLast(i);
+        }
+
+        assertEquals(expectedMax, (int) mad.max());
+    }
 }
