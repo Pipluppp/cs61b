@@ -8,17 +8,6 @@ import java.util.Iterator;
 public class ArrayDequeTest {
 
     @Test
-    public void returnIndexTest() {
-        ArrayDeque deque = new ArrayDeque();
-
-        int mod = 10;
-
-        for (int i = 0; i < 1000; i++) {
-            assertEquals(i % mod, deque.returnIndex(i));
-        }
-    }
-
-    @Test
     public void addRemoveFirstTest() {
         ArrayDeque deque = new ArrayDeque();
 
